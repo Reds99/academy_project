@@ -1,15 +1,21 @@
 package com.academy.project.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Corso {
@@ -21,9 +27,11 @@ public class Corso {
     private String nomeCorso;
 
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dataInizioCorso;
 
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dataFineCorso;
 
     private double costoCorso;
@@ -34,8 +42,17 @@ public class Corso {
 
     
     @ManyToOne
-    @JoinColumn(name = "docente_id")
+    @JoinColumn(name = "cod_docente")
     private Docente docente;
+    
+    @ManyToMany
+    @JoinTable(
+        name = "corsisti_corsi",
+        joinColumns = @JoinColumn(name = "cod_corso"),
+        inverseJoinColumns = @JoinColumn(name = "cod_corsista")
+    )
+    private List<Corsista> corsisti = new ArrayList<>();
+
 
     
 	public Long getCodCorso() {
@@ -102,12 +119,22 @@ public class Corso {
 		this.docente = docente;
 	}
 
+	public List<Corsista> getCorsisti() {
+		return corsisti;
+	}
+
+	public void setCorsisti(List<Corsista> corsisti) {
+		this.corsisti = corsisti;
+	}
+
 	@Override
 	public String toString() {
 		return "Corso [codCorso=" + codCorso + ", nomeCorso=" + nomeCorso + ", dataInizioCorso=" + dataInizioCorso
 				+ ", dataFineCorso=" + dataFineCorso + ", costoCorso=" + costoCorso + ", commentiCorso=" + commentiCorso
-				+ ", aulaCorso=" + aulaCorso + ", docente=" + docente + "]";
+				+ ", aulaCorso=" + aulaCorso + ", docente=" + docente + ", corsisti=" + corsisti + "]";
 	}
+
+	
 
 	
     
