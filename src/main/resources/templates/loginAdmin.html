@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http:www.thymeleaf.org">
+<head th:replace="fragments/cdn :: cdn"></head>
+<body>
+    <div th:insert="fragments/nav :: navbar"></div>
+    <div class="login-container">
+        <form th:action="@{/login}" method="post" class="login-form">
+            <header>
+                <h3>Login</h3>
+            </header>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="Username..." class="form-control" id="username">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Password..." class="form-control" id="password">
+            </div>
+            <button type="submit" class="btn-login">
+                Login
+            </button>
+        </form>
+    </div>
+</body>
+</html>

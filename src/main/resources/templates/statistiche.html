@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http:www.thymeleaf.org">
+
+<head th:replace="fragments/cdn :: cdn"></head>
+
+<body>
+	<div th:insert="fragments/nav :: navbar"></div>
+
+	<div class="container">
+		<ul class="nav nav-tabs">
+			<li role="presentation"><a th:href="@{/admin/home}"><i
+					class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Corsisti</a></li>
+			<li role="presentation"><a th:href="@{/admin/corsi}"><i
+					class="glyphicon glyphicon-education"></i>&nbsp;&nbsp;Corsi</a></li>
+			<li role="presentation" class="active"><a
+				th:href="@{/admin/statistiche}"><i
+					class="glyphicon glyphicon-stats"></i>&nbsp;&nbsp;Statistiche</a></li>
+		</ul>
+
+		<div class="jumbotron custom-jumbotron">
+			<h2>
+				<strong>Statistiche</strong>
+			</h2>
+			<table class="table table-hover custom-table">
+				<thead>
+					<tr>
+						<th style="width: 200px;">Corsisti totali</th>
+						<th style="width: 200px;">Corso + frequentato</th>
+						<th style="width: 200px;">Data d'inizio ultimo corso</th>
+						<th style="width: 200px;">Durata media dei corsi</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td th:text="${corsistiTotali}"></td>
+						<td>
+							<ol>
+								<li th:each="corso : ${corsiPiuFrequentati}" th:text="${corso}"></li>
+							</ol>
+						</td>
+						<td
+							th:text="${#dates.format(dataInizioUltimoCorso, 'dd-MMM-YYYY')}"></td>
+						<td th:text="${durataMediaCorsi} + ' giorni'"></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<table class="table table-hover custom-table">
+				<thead>
+					<tr>
+						<th style="width: 200px;">Corsisti iscritti</th>
+						<th style="width: 200px;">Docente con + corsi</th>
+						<th style="width: 200px;">Corsi con posti disponibili</th>
+						<th style="width: 200px;">Numero commenti</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<div>
+								<div th:each="corsista : ${listaCorsisti}"><a
+									th:href="@{/admin/dettagliCorsista/{codCorsista}(codCorsista=${corsista.codCorsista})}"
+									th:text="${corsista.cognomeCorsista}"></a></div>
+							</div>
+						</td>
+						<td>
+							<ul>
+								<li th:each="docente : ${docentiConPiuCorsi}"
+									th:text="${docente.cognomeDocente}"></li>
+							</ul>
+						</td>
+						<td>
+							<ul>
+								<li th:each="corso : ${corsiConPostiDisponibili}"
+									th:text="${corso.nomeCorso}"></li>
+							</ul>
+						</td>
+						<td th:text="${numeroCommenti}"></td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+
+
+	</div>
+	<footer th:include="fragments/footer :: footer"></footer>
+</body>
+
+</html>

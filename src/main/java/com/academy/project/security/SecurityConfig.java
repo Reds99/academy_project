@@ -6,6 +6,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.academy.project.repository.AmministratoreRepository;
@@ -22,21 +23,36 @@ public class SecurityConfig {
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 		http.authorizeHttpRequests()
-		.antMatchers("/")
-		.permitAll()
-		.antMatchers("/admin/**")
-		.hasRole("ADMIN")
-		.and()
-		.formLogin()
-		.loginPage("/loginAdmin")
-		.permitAll()
-		.and()
-		.logout()
-		.logoutRequestMatcher(new AntPathRequestMatcher("/logoutAdmin"))
-		.logoutSuccessUrl("/admin/");
+		 .antMatchers("/")
+         .permitAll()
+         .antMatchers("/admin/**")
+         .hasRole("ADMIN")
+         .and()
+         .formLogin()
+         .loginPage("/")
+         .loginProcessingUrl("/login")
+         .failureHandler(customAuthenticationFailureHandler()) // Usa il gestore delle eccezioni di autenticazione personalizzato
+         .successHandler(loginSuccessHandler())
+         .permitAll()
+         .and()
+         .logout()
+         .logoutRequestMatcher(new AntPathRequestMatcher("/logoutAdmin"))
+         .logoutSuccessUrl("/admin/");
 		
 		return http.build();
 	}
+	
+	 @Bean
+	    public SimpleUrlAuthenticationSuccessHandler loginSuccessHandler() {
+	        SimpleUrlAuthenticationSuccessHandler successHandler = new SimpleUrlAuthenticationSuccessHandler();
+	        successHandler.setDefaultTargetUrl("/admin/home"); // Reindirizza gli utenti alla pagina "/admin/" dopo il login con successo
+	        return successHandler;
+	    }
+	 
+	 @Bean
+	    public CustomAuthenticationFailureHandler customAuthenticationFailureHandler() {
+	        return new CustomAuthenticationFailureHandler();
+	    }
 	
 	@Bean
 	DaoAuthenticationProvider authenticationProvider() {

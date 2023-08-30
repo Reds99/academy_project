@@ -55,13 +55,6 @@ public class Docente {
 	public String toString() {
 		return "Docente [codDocente=" + codDocente + ", nomeDocente=" + nomeDocente + ", cognomeDocente="
 				+ cognomeDocente + ", cvDocente=" + cvDocente + "]";
-	}
-
-    
-
-	
-
-    
-
+	}    
 }
 

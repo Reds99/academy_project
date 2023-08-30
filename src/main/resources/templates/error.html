@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/cdn :: cdn"></head>
+
+<body>
+	<div th:insert="fragments/nav :: navbar"></div>
+	<div class="container">
+		<div class="page-header">
+			<h2>Error Page</h2>
+		</div>
+
+		<table class="table table-bordered">
+			<tr>
+				<td style="width: 20%">Date</td>
+				<td style="width: 80%" th:text="${timestamp}"></td>
+			</tr>
+			<tr>
+				<td>Path</td>
+				<td th:text="${path}"></td>
+			</tr>
+			<tr>
+				<td>Status</td>
+				<td th:text="${status}"></td>
+			</tr>
+			<tr>
+				<td>Message</td>
+				<td th:text="${message}"></td>
+			</tr>
+			<tr>
+				<td>Exception</td>
+				<td th:text="${exception}"></td>
+			</tr>
+			<tr>
+				<td>Trace</td>
+				<td th:text="${trace}"></td>
+			</tr>
+		</table>
+
+		<button id="inserisci" type="button" onclick="goBack()"
+			class="btn btn-primary btn-sm">
+			<span class="glyphicon glyphicon-add"></span>&nbsp;Indietro
+		</button>
+
+		<script th:inline="javascript">
+			function goBack() {
+				window.history.back();
+			}
+		</script>
+
+	</div>
+
+	<footer th:include="fragments/footer :: footer"></footer>
+</body>
+
+</html>

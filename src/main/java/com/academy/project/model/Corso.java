@@ -39,7 +39,8 @@ public class Corso {
     private String commentiCorso;
 
     private String aulaCorso;
-
+    
+    private int numeroStudenti = 15;
     
     @ManyToOne
     @JoinColumn(name = "cod_docente")
@@ -69,6 +70,14 @@ public class Corso {
 
 	public void setNomeCorso(String nomeCorso) {
 		this.nomeCorso = nomeCorso;
+	}
+
+	public int getNumeroStudenti() {
+		return numeroStudenti;
+	}
+
+	public void setNumeroStudenti(int numeroStudenti) {
+		this.numeroStudenti = numeroStudenti;
 	}
 
 	public Date getDataInizioCorso() {
