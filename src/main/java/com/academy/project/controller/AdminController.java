@@ -241,4 +241,15 @@ public class AdminController {
 		mv.setViewName("dettaglioCorsista");
 		return mv;
 	}
+	
+	@GetMapping("/admin/espelli/{codCorsista}")
+	public ModelAndView espelliCorsista(@PathVariable long codCorsista, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		List<Corsista> listaCorsisti = corsistaService.findAllCorsistiWithCorsi();
+		String username = (String) session.getAttribute("username");
+		mv.addObject("_username", username);
+		mv.addObject("listaCorsisti", listaCorsisti);
+		mv.setViewName("adminHome");
+		return mv;
+	}
 }

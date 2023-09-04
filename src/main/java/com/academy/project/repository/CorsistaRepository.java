@@ -1,5 +1,6 @@
 package com.academy.project.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,6 +15,9 @@ public interface CorsistaRepository extends JpaRepository<Corsista, Long> {
 
 	@Query(value = "SELECT DISTINCT c.* FROM corsista c LEFT JOIN corsisti_corsi cc ON c.cod_corsista = cc.cod_corsista", nativeQuery = true)
 	List<Corsista> findAllCorsistiWithCorsi();
+	
+	@Query(value = "SELECT DISTINCT c.* FROM corsista c LEFT JOIN corsisti_corsi cc ON c.cod_corsista = cc.cod_corsista", nativeQuery = true)
+	ArrayList<Corsista> findAllCorsistiWithCorsiArrayList();
 
 	@Query(value = "SELECT COUNT(DISTINCT c.cod_corsista) FROM corsista c JOIN corsisti_corsi cc ON c.cod_corsista = cc.cod_corsista", nativeQuery = true)
 	Long countTotalCorsisti();

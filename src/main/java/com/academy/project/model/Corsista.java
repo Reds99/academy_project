@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Corsista {
 
@@ -27,6 +29,7 @@ public class Corsista {
 	}
 	
 	@ManyToMany(mappedBy = "corsisti")
+    @JsonIgnoreProperties("corsisti") // Evita la serializzazione delle proprietà corsisti in Corso
     private List<Corso> corsi = new ArrayList<>();
 
 	public void setCodCorsista(Long codCorsista) {

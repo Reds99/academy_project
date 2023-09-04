@@ -13,7 +13,7 @@ import com.academy.project.repository.AmministratoreRepository;
 
 
 @Configuration
-public class SecurityConfig {
+public class SecurityConfig{
 	private AmministratoreRepository amministratoreRepository;
 
 	public SecurityConfig(AmministratoreRepository amministratoreRepository) {
@@ -31,7 +31,7 @@ public class SecurityConfig {
          .formLogin()
          .loginPage("/")
          .loginProcessingUrl("/login")
-         .failureHandler(customAuthenticationFailureHandler()) // Usa il gestore delle eccezioni di autenticazione personalizzato
+         .failureHandler(customAuthenticationFailureHandlerSecurity()) // Usa il gestore delle eccezioni di autenticazione personalizzato
          .successHandler(loginSuccessHandler())
          .permitAll()
          .and()
@@ -50,7 +50,7 @@ public class SecurityConfig {
 	    }
 	 
 	 @Bean
-	    public CustomAuthenticationFailureHandler customAuthenticationFailureHandler() {
+	    public CustomAuthenticationFailureHandler customAuthenticationFailureHandlerSecurity() {
 	        return new CustomAuthenticationFailureHandler();
 	    }
 	

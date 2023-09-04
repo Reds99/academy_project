@@ -1,5 +1,6 @@
 package com.academy.project.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,6 +45,11 @@ public class CorsistaServiceImpl implements CorsistaService {
 	@Override
 	public List<Corsista> findCorsistiIscritti() {
 		return cr.findCorsistiIscritti();
+	}
+
+	@Override
+	public ArrayList<Corsista> findAllCorsistiWithCorsiArrayList() {
+		return cr.findAllCorsistiWithCorsiArrayList();
 	}
 
 }

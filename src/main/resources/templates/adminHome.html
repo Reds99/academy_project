@@ -26,6 +26,7 @@
 					<tr>
 						<th style="width: 200px;">Corsisti</th>
 						<th style="width: 200px;">Corsi</th>
+						<th style="width: 200px;">Espelli</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -37,6 +38,12 @@
 									th:text="${corso.nomeCorso}"></li>
 							</ul>
 						</td>
+						<td><a
+							th:href="@{/admin/espelli/{codCorsista}(codCorsista=${corsista.codCorsista})}">
+								<button type="button" class="btn btn-danger btn-sm">
+									<span class="glyphicon glyphicon-add"></span>&nbsp;Espelli
+								</button>
+						</a></td>
 					</tr>
 				</tbody>
 			</table>

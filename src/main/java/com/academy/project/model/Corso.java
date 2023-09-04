@@ -17,6 +17,8 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Corso {
 	
@@ -52,6 +54,8 @@ public class Corso {
         joinColumns = @JoinColumn(name = "cod_corso"),
         inverseJoinColumns = @JoinColumn(name = "cod_corsista")
     )
+    @JsonIgnoreProperties("corsi") // Evita la serializzazione delle proprietà corsi in Corsista
+
     private List<Corsista> corsisti = new ArrayList<>();
 
 
