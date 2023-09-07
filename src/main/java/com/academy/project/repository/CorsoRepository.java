@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.academy.project.model.Corso;
 
@@ -28,4 +29,7 @@ public interface CorsoRepository extends JpaRepository<Corso, Long> {
 	
 	@Query(value = "SELECT COUNT(*) FROM corso WHERE commenti_corso IS NOT NULL", nativeQuery = true)
 	Long trovaNumeroCommenti();
+	
+	@Query(value = "SELECT * FROM Corso c WHERE c.cod_docente = :codDocente", nativeQuery = true)
+    List<Corso> findCorsiByCodDocente(@Param("codDocente") Long codDocente);
 }

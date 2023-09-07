@@ -62,4 +62,9 @@ public class CorsoServiceImpl implements CorsoService{
 	public Long trovaNumeroCommenti() {
 		return cr.trovaNumeroCommenti();
 	}
+
+	@Override
+	public List<Corso> findCorsoByCodDocente(Long codDocente) {
+		return cr.findCorsiByCodDocente(codDocente);
+	}
 }

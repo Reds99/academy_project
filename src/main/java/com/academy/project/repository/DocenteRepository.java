@@ -19,4 +19,7 @@ public interface DocenteRepository extends JpaRepository<Docente, Long> {
 			+ "GROUP BY d.cod_docente " + "HAVING COUNT(c.cod_corso) = " + "(SELECT MAX(cnt) "
 			+ " FROM (SELECT COUNT(*) as cnt FROM corso GROUP BY cod_docente) as counts)", nativeQuery = true)
 	List<Docente> findDocenteConPiuCorsi();
+	
+	@Query(value = "SELECT * FROM docente WHERE cod_docente <> :codDocente", nativeQuery = true)
+    List<Docente> findAllTranneCodDocente(@Param("codDocente") Long codDocente);
 }

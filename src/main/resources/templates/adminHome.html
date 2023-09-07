@@ -13,6 +13,8 @@
 			</li>
 			<li role="presentation"><a th:href="@{/admin/corsi}"><i
 					class="glyphicon glyphicon-education"></i>&nbsp;&nbsp;Corsi</a></li>
+			<li role="presentation"><a th:href="@{/admin/docenti}"><i
+					class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Docenti</a></li>
 			<li role="presentation"><a th:href="@{/admin/statistiche}"><i
 					class="glyphicon glyphicon-stats"></i>&nbsp;&nbsp;Statistiche</a></li>
 		</ul>
@@ -31,7 +33,7 @@
 				</thead>
 				<tbody>
 					<tr th:each="corsista : ${listaCorsisti}">
-						<td th:text="${corsista.cognomeCorsista}"></td>
+						<td th:text="${corsista.nomeCorsista} + ' '+ ${corsista.cognomeCorsista}"></td>
 						<td>
 							<ul>
 								<li th:each="corso : ${corsista.corsi}"

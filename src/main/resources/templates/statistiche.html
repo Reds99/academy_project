@@ -12,6 +12,8 @@
 					class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Corsisti</a></li>
 			<li role="presentation"><a th:href="@{/admin/corsi}"><i
 					class="glyphicon glyphicon-education"></i>&nbsp;&nbsp;Corsi</a></li>
+			<li role="presentation"><a th:href="@{/admin/docenti}"><i
+					class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Docenti</a></li>
 			<li role="presentation" class="active"><a
 				th:href="@{/admin/statistiche}"><i
 					class="glyphicon glyphicon-stats"></i>&nbsp;&nbsp;Statistiche</a></li>
@@ -58,9 +60,11 @@
 					<tr>
 						<td>
 							<div>
-								<div th:each="corsista : ${listaCorsisti}"><a
-									th:href="@{/admin/dettagliCorsista/{codCorsista}(codCorsista=${corsista.codCorsista})}"
-									th:text="${corsista.cognomeCorsista}"></a></div>
+								<div th:each="corsista : ${listaCorsisti}">
+									<a
+										th:href="@{/admin/dettagliCorsista/{codCorsista}(codCorsista=${corsista.codCorsista})}"
+										th:text="${corsista.nomeCorsista} + ' ' + ${corsista.cognomeCorsista}"></a>
+								</div>
 							</div>
 						</td>
 						<td>

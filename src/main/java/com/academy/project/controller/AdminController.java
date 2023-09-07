@@ -245,11 +245,60 @@ public class AdminController {
 	@GetMapping("/admin/espelli/{codCorsista}")
 	public ModelAndView espelliCorsista(@PathVariable long codCorsista, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		List<Corsista> listaCorsisti = corsistaService.findAllCorsistiWithCorsi();
 		String username = (String) session.getAttribute("username");
+		
+		Corsista corsista = corsistaService.findById(codCorsista).get();
+		corsistaService.deleteCorsista(corsista);
+		List<Corsista> listaCorsisti = corsistaService.findAllCorsistiWithCorsi();
+
 		mv.addObject("_username", username);
 		mv.addObject("listaCorsisti", listaCorsisti);
 		mv.setViewName("adminHome");
 		return mv;
 	}
+	
+	@GetMapping("/admin/docenti")
+	public ModelAndView showDocenti(HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		List<Docente> docenti = ds.findAll();
+		mv.addObject("listaDocenti", docenti);
+		mv.addObject("_username", session.getAttribute("username"));
+		mv.setViewName("docenti");
+		return mv;
+	}
+	
+	@GetMapping("/admin/insertDocente")
+	public ModelAndView insertDocente(HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("_username", session.getAttribute("username"));
+		mv.setViewName("insertDocente");
+		return mv;
+	}
+	
+	@PostMapping("/admin/addDocente")
+	public ModelAndView addDocente(@RequestParam("nome") String nome, @RequestParam("cognome") String cognome, @RequestParam("cv") Long anniEsperienza, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		
+		ds.addDocente(nome, cognome, anniEsperienza);
+		List<Docente> docenti = ds.findAll();
+		
+		mv.addObject("listaDocenti", docenti);
+		mv.addObject("_username", session.getAttribute("username"));
+		mv.setViewName("docenti");
+		return mv;
+	}
+	
+	@PostMapping("/admin/trasferisci/{codDocente}")
+	public ModelAndView trasferisciDocente(@PathVariable Long codDocente, @RequestParam("cognomeDocente") String cognomeDocente, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+				
+		ds.deleteDocente(codDocente, cognomeDocente);
+		List<Docente> docenti = ds.findAll();
+		
+		mv.addObject("listaDocenti", docenti);
+		mv.addObject("_username", session.getAttribute("username"));
+		mv.setViewName("docenti");
+		return mv;
+	}
+	
 }

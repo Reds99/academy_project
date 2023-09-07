@@ -38,7 +38,7 @@ public class CorsistaRestController {
 	}
 	
 	@PostMapping("/create")
-	void createCorsista(Corsista corsista) {
+	public void createCorsista(Corsista corsista) {
 		cs.saveCorsista(corsista);
 	}
 	

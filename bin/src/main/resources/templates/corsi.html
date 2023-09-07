@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http:www.thymeleaf.org">
+
+<head th:replace="fragments/cdn :: cdn"></head>
+
+<body>
+	<div th:insert="fragments/nav :: navbar"></div>
+
+	<div class="container">
+		<ul class="nav nav-tabs">
+			<li role="presentation"><a th:href="@{/admin/home}"><i
+					class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Corsisti</a></li>
+			<li role="presentation" class="active"><a
+				th:href="@{/admin/corsi}"><i
+					class="glyphicon glyphicon-education"></i>&nbsp;&nbsp;Corsi</a></li>
+			<li role="presentation"><a th:href="@{/admin/statistiche}"><i
+					class="glyphicon glyphicon-stats"></i>&nbsp;&nbsp;Statistiche</a></li>
+		</ul>
+
+		<div class="jumbotron custom-jumbotron">
+			<h2>
+				<strong>Corsi</strong>
+			</h2>
+			<table class="table table-hover custom-table">
+				<thead>
+					<tr>
+						<th style="width: 200px;">Nome corso</th>
+						<th style="width: 200px;">Data inizio</th>
+						<th style="width: 200px;">Data fine</th>
+						<th style="width: 200px;">Aula</th>
+						<th style="width: 200px;">Docente</th>
+						<th style="width: 200px;">Posti disponibili</th>
+						<th style="width: 200px;">Iscrizioni</th>
+						<th style="width: 200px;">Elimina</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="corso : ${listaCorsi}">
+						<td th:text="${corso.nomeCorso}"></td>
+						<td th:text="${corso.dataInizioCorso}"></td>
+						<td th:text="${corso.dataFineCorso}"></td>
+						<td th:text="${corso.aulaCorso}"></td>
+						<td th:text="${corso.docente.cognomeDocente}"></td>
+						<td th:text="${corso.numeroStudenti}"></td>
+
+						<td th:switch="${corso.numeroStudenti} > 0">
+						<a th:case="true" th:href="@{/admin/iscrivi/{codCorso}(codCorso=${corso.codCorso})}">
+								<button id="inserisci" type="button"
+									class="btn btn-primary btn-sm">
+									<span class="glyphicon glyphicon-add"></span>&nbsp;Iscrivi
+								</button>
+						</a>
+						<a th:case="false">Posti esauriti!</a>
+						</td>
+						<td th:switch="${corso.dataFineCorso.before(#dates.createNow())}"><a
+							th:case="true" th:href="@{/admin/elimina/{codCorso}(codCorso=${corso.codCorso})}">
+								<button type="button" class="btn btn-danger btn-sm">
+									<span class="glyphicon glyphicon-add"></span>&nbsp;Elimina
+								</button>
+						</a>
+						<a th:case="false">Corso non terminato!</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<a th:href="@{/admin/insertCorsi}">
+				<button id="inserisci" type="button" class="btn btn-primary btn-sm">
+					<span class="glyphicon glyphicon-add"></span>&nbsp;Inserisci
+				</button>
+			</a>
+
+		</div>
+
+
+	</div>
+	<footer th:include="fragments/footer :: footer"></footer>
+</body>
+
+</html>

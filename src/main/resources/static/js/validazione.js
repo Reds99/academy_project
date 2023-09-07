@@ -86,6 +86,14 @@ $(document).ready(function() {
 					}
 				}
 			},
+			cv: {
+				container: '#infoCv',
+				validators: {
+					notEmpty: {
+						message: 'Il campo dell esperienza non può essere vuoto'
+					},
+				}
+			},
 			precedentiFormativi: {
 				container: '#infoPrecedentiFormativi',
 				validators: {

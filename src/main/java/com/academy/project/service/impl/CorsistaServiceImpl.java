@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.academy.project.model.Corsista;
+import com.academy.project.model.Corso;
 import com.academy.project.repository.CorsistaRepository;
 import com.academy.project.service.CorsistaService;
 
@@ -50,6 +51,17 @@ public class CorsistaServiceImpl implements CorsistaService {
 	@Override
 	public ArrayList<Corsista> findAllCorsistiWithCorsiArrayList() {
 		return cr.findAllCorsistiWithCorsiArrayList();
+	}
+
+	@Override
+	public void deleteCorsista(Corsista corsista) {
+		List<Corso> corsi = corsista.getCorsi();
+		for(Corso corso : corsi) {
+			corso.getCorsisti().remove(corsista);
+			corso.setNumeroStudenti(corso.getNumeroStudenti() + 1);
+		}
+		corsista.getCorsi().clear();
+		cr.delete(corsista);
 	}
 
 }

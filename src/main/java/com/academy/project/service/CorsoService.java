@@ -16,4 +16,5 @@ public interface CorsoService {
 	Double durataMediaCorsi();
 	List<Corso> findCorsiConPostiDisponibili();
 	Long trovaNumeroCommenti();
+	List<Corso> findCorsoByCodDocente(Long codDocente);
 }

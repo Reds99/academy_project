@@ -1,0 +1,37 @@
+<header th:fragment="navbar" xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<nav class="navbar navbar-default" style="background-color: #007bff;">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#menu">
+					<span class="icon-bar" style="background-color: #fff;"></span> <span
+						class="icon-bar" style="background-color: #fff;"></span> <span
+						class="icon-bar" style="background-color: #fff;"></span>
+				</button>
+				<div>
+					<a class="navbar-brand" href="/admin/home" style="color: #fff;"><strong>Home
+						Page</strong></a>
+				</div>
+			</div>
+			
+			<div class="collapse navbar-collapse" id="menu">
+				<ul th:if="${_username} != null" class="nav navbar-nav navbar-right">
+					<li class="dropdown"><a style="color: #fff;" href="#"
+						class="dropdown-toggle" data-toggle="dropdown" role="button">
+							<span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;<strong><th:block
+								th:text="${_username}"></th:block></strong>
+					</a>
+						<ul class="dropdown-menu">
+							<li><a href="/admin/logout"><span
+							class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;&nbsp;&nbsp;Logout</a></li>
+						</ul></li>
+				</ul>
+			</div>
+			
+		</div>
+	</nav>
+</header>
+
+
+

@@ -13,6 +13,8 @@
 			<li role="presentation" class="active"><a
 				th:href="@{/admin/corsi}"><i
 					class="glyphicon glyphicon-education"></i>&nbsp;&nbsp;Corsi</a></li>
+			<li role="presentation"><a th:href="@{/admin/docenti}"><i
+					class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;Docenti</a></li>
 			<li role="presentation"><a th:href="@{/admin/statistiche}"><i
 					class="glyphicon glyphicon-stats"></i>&nbsp;&nbsp;Statistiche</a></li>
 		</ul>
@@ -43,23 +45,20 @@
 						<td th:text="${corso.docente.cognomeDocente}"></td>
 						<td th:text="${corso.numeroStudenti}"></td>
 
-						<td th:switch="${corso.numeroStudenti} > 0">
-						<a th:case="true" th:href="@{/admin/iscrivi/{codCorso}(codCorso=${corso.codCorso})}">
+						<td th:switch="${corso.numeroStudenti} > 0"><a th:case="true"
+							th:href="@{/admin/iscrivi/{codCorso}(codCorso=${corso.codCorso})}">
 								<button id="inserisci" type="button"
 									class="btn btn-primary btn-sm">
 									<span class="glyphicon glyphicon-add"></span>&nbsp;Iscrivi
 								</button>
-						</a>
-						<a th:case="false">Posti esauriti!</a>
-						</td>
+						</a> <a th:case="false">Posti esauriti!</a></td>
 						<td th:switch="${corso.dataFineCorso.before(#dates.createNow())}"><a
-							th:case="true" th:href="@{/admin/elimina/{codCorso}(codCorso=${corso.codCorso})}">
+							th:case="true"
+							th:href="@{/admin/elimina/{codCorso}(codCorso=${corso.codCorso})}">
 								<button type="button" class="btn btn-danger btn-sm">
 									<span class="glyphicon glyphicon-add"></span>&nbsp;Elimina
 								</button>
-						</a>
-						<a th:case="false">Corso non terminato!</a>
-						</td>
+						</a> <a th:case="false">Corso non terminato!</a></td>
 					</tr>
 				</tbody>
 			</table>
