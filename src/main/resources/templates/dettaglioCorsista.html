@@ -19,29 +19,30 @@
 			 + ${corsista.precedentiFormativi}"></span>
 
 			<h4 style="margin-top: 50px;">Iscritto ai corsi di:</h4>
-			<div th:each="corso : ${corsista.corsi}"> 
-				<ul>
-					<li th:text="${corso.nomeCorso} + ' | ' + 'Professore: ' + ${corso.docente.cognomeDocente}"></li>
+			<div th:each="corso : ${corsista.corsi}">
+				<ul style="display: inline;">
+					<li
+						th:text="${corso.nomeCorso} + ' | ' + 'Professore: ' + ${corso.docente.cognomeDocente}"></li>
 				</ul>
+				<form
+					th:action="@{'/admin/lasciaCorso/' + ${codCorsista} + '/' + ${corso.codCorso}}"
+					method="post">
+					<input type="hidden" name="codCorsista"
+						th:value="${corsista.codCorsista}" /> <input type="hidden"
+						name="codCorso" th:value="${corso.codCorso}" />
+					<button type="submit">Lascia</button>
+				</form>
 			</div>
 
 			<hr>
 
-			<button id="inserisci" type="button" onclick="goBack()"
-				class="btn btn-primary btn-sm">
-				<span class="glyphicon glyphicon-add"></span>&nbsp;Indietro
-			</button>
-
-			<script th:inline="javascript">
-				function goBack() {
-					window.history.back();
-				}
-			</script>
+			<a href="/admin/statistiche" class="btn btn-primary btn-sm">Indietro
+			</a>
 
 		</div>
 
 	</div>
-
+	
 	<footer th:include="fragments/footer :: footer"></footer>
 
 </body>

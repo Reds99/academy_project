@@ -1,6 +1,7 @@
 package com.academy.project.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,6 +60,12 @@ public class DocenteServiceImpl implements DocenteService {
 	@Override
 	public List<Docente> findAllTranneDocente(Long codDocente) {
 		return dr.findAllTranneCodDocente(codDocente);
+	}
+
+	@Override
+	public void deleteDocenteSecco(Long codDocente) {
+		Optional<Docente> docente = dr.findById(codDocente);
+		dr.delete(docente.get());
 	}
 
 }

@@ -11,4 +11,5 @@ public interface DocenteService {
 	void addDocente(String nome, String cognome, Long anniEsperienza);
 	void deleteDocente(Long codDocente, String cognomeDocenteSostitutivo);
 	List<Docente> findAllTranneDocente(Long codDocente);
+	void deleteDocenteSecco(Long codDocente);
 }

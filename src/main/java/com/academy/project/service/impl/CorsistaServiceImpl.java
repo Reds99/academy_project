@@ -6,17 +6,23 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.academy.project.model.Corsista;
 import com.academy.project.model.Corso;
 import com.academy.project.repository.CorsistaRepository;
+import com.academy.project.repository.CorsoRepository;
 import com.academy.project.service.CorsistaService;
 
 @Service
+@Transactional
 public class CorsistaServiceImpl implements CorsistaService {
 
 	@Autowired
 	CorsistaRepository cr;
+	
+	@Autowired
+	CorsoRepository corsoRepo;
 	
 	@Override
 	public List<Corsista> findAllCorsistiWithCorsi() {
@@ -64,4 +70,15 @@ public class CorsistaServiceImpl implements CorsistaService {
 		cr.delete(corsista);
 	}
 
+	@Override
+	public void leaveCorso(Long codCorsista, Long codCorso) {
+		Corsista corsista = cr.findById(codCorsista).get();
+		Corso corso = corsoRepo.findById(codCorso).get();
+		corso.getCorsisti().remove(corsista);
+		corso.setNumeroStudenti(corso.getNumeroStudenti() + 1);
+		corsista.getCorsi().remove(corso);
+		corsoRepo.save(corso);
+		cr.save(corsista);
+		cr.leaveCorso(codCorsista, codCorso);
+	}
 }

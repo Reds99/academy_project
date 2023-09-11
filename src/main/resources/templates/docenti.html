@@ -38,7 +38,8 @@
 						<td th:text="${docente.cognomeDocente}"></td>
 						<td th:text="${docente.cvDocente} + ' anni'"></td>
 						<td>
-							<div th:each="corso : ${@corsoRepository.findCorsiByCodDocente(docente.codDocente)}">
+							<div
+								th:each="corso : ${@corsoRepository.findCorsiByCodDocente(docente.codDocente)}">
 								<span th:text="${corso.nomeCorso}"></span>
 							</div>
 						</td>
@@ -77,31 +78,38 @@
 					</button>
 				</div>
 				<form
-						th:action="@{/admin/trasferisci/{codDocente}(codDocente=${docente.codDocente})}"
-						method="post" class="form-horizontal" id="corsistaForm">
-				<div class="modal-body">
+					th:action="@{/admin/trasferisci/{codDocente}(codDocente=${docente.codDocente})}"
+					method="post" class="form-horizontal" id="corsistaForm">
+					<div class="modal-body">
 
-					<p th:text="'Esperienza: ' + ${docente.cvDocente} + ' anni'"></p>
+						<p th:text="'Esperienza: ' + ${docente.cvDocente} + ' anni'"></p>
 
-						<span>Seleziona un docende che lo sostituirà sui corsi:</span> <select
-							name="cognomeDocente">
-							<option
-								th:each="docenteCorrente : ${@docenteRepository.findAllTranneCodDocente(docente.codDocente)}"
-								th:text="${docenteCorrente.cognomeDocente}"></option>
-						</select>
+						<div th:if="${#lists.isEmpty(@corsoRepository.findCorsiByCodDocente(docente.codDocente)) == false}">
+							<span>Seleziona un docende che lo sostituirà sui corsi:</span> 
+							<select name="cognomeDocente">
+								<option
+									th:each="docenteCorrente : ${@docenteRepository.findAllTranneCodDocente(docente.codDocente)}"
+									th:text="${docenteCorrente.cognomeDocente}"></option>
+							</select>
+						</div>
 
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">Chiudi</button>
 
-					<button type="submit" class="btn btn-danger" id="trasferisci">
-						Trasferisci</button>
-				</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Chiudi</button>
+
+						<button type="submit" class="btn btn-danger" id="trasferisci">
+							Trasferisci</button>
+					</div>
 				</form>
 			</div>
 		</div>
 	</div>
+
+	<div id="alertMessage" th:if="${success != null}"
+		th:text="'Operazione avvenuta con successo!'"
+		class="alert alert-success" role="alert"></div>
 
 	<footer th:include="fragments/footer :: footer"></footer>
 </body>

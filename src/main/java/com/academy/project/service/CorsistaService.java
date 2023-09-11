@@ -15,4 +15,5 @@ public interface CorsistaService {
 	Long countTotalCorsisti();
 	List<Corsista> findCorsistiIscritti();
 	void deleteCorsista(Corsista corsista);
+	void leaveCorso(Long codCorsista, Long codCorso);
 }

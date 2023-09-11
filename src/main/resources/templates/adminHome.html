@@ -33,7 +33,8 @@
 				</thead>
 				<tbody>
 					<tr th:each="corsista : ${listaCorsisti}">
-						<td th:text="${corsista.nomeCorsista} + ' '+ ${corsista.cognomeCorsista}"></td>
+						<td
+							th:text="${corsista.nomeCorsista} + ' '+ ${corsista.cognomeCorsista}"></td>
 						<td>
 							<ul>
 								<li th:each="corso : ${corsista.corsi}"
@@ -58,6 +59,9 @@
 
 		</div>
 
+		<div id="alertMessage" th:if="${success != null}"
+			th:text="'Operazione avvenuta con successo!'"
+			class="alert alert-success" role="alert"></div>
 
 	</div>
 	<footer th:include="fragments/footer :: footer"></footer>

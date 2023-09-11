@@ -204,11 +204,21 @@ footer nav ul li a:hover {
     display: inline-block;
     height: 100%;
     vertical-align: middle;
-    margin-right: -4px; /* Impedisce lo sfarfallio del contenuto */
+    margin-right: -4px;
 }
 
 .modal-dialog {
     display: inline-block;
     text-align: left;
     vertical-align: middle;
+}
+
+.alert.alert-success {
+    position: fixed;
+    bottom: 50px;
+    z-index: 999;
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: hideAlert 3s forwards;
 }

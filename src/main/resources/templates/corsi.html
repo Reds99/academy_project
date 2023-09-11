@@ -70,7 +70,10 @@
 			</a>
 
 		</div>
-
+		
+		<div id="alertMessage" th:if="${success != null}"
+			th:text="'Operazione avvenuta con successo!'"
+			class="alert alert-success" role="alert"></div>
 
 	</div>
 	<footer th:include="fragments/footer :: footer"></footer>
